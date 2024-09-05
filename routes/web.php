@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+// no.07 (praktikum 2)
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticlesController;
+
+// no.09 (praktikum 2)
+use App\Http\Controllers\PhotoController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +73,30 @@ Route::get('/user/{name?}', function ($name='John') {
     return 'Nama Saya  ' .$name;
 });
 
+//PRAKTIKUM 2
+// no. 04
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+//no. 06
+Route::get('/', [WelcomeController::class,'index']);
+
+Route::get('/about', [WelcomeController::class,'about']);
+
+Route::get('/articles/{id}', [WelcomeController::class,'articles']);
+
+// no. 07
+Route::get('/', HomeController::class);
+Route::get('/about', AboutController::class);
+Route::get('/articles/{id}', ArticlesController::class);
+
+//RESOURCE CONTROLLER
+//no. 09
+Route::resource('photos', PhotoController::class);
+
+Route::resource('photos', PhotoController::class)->only([
+    'index', 'show'
+    ]);
+
+Route::resource('photos', PhotoController::class)->except([
+    'create', 'store', 'update', 'destroy'
+        ]);
